@@ -27,6 +27,9 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/sched.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/bore.h>
+#define CREATE_TRACE_POINTS
 
 #include <linux/sec_debug.h>
 
@@ -712,6 +715,8 @@ static void set_load_weight(struct task_struct *p, bool update_load)
 {
 	int prio = p->static_prio - MAX_RT_PRIO;
 	struct load_weight *load = &p->se.load;
+
+	trace_android_vh_bore_set_load_weight(p, &prio);
 
 	/*
 	 * SCHED_IDLE tasks get minimal weight:
