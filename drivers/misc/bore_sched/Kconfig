@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config BORE_SCHED
+	tristate "BORE (Burst-Oriented Response Enhancer) scheduler"
+	depends on ANDROID_VENDOR_HOOKS
+	help
+	  Penalizes CPU-bound tasks based on their burst time, favouring
+	  interactive tasks. Hooks into CFS through the android_vh_bore_*
+	  vendor hooks. Can be toggled at runtime with
+	  /sys/module/bore_sched/parameters/sched_bore.
+
+	  Based on BORE by Masahito S. and the AxionOS bore_sched module.
